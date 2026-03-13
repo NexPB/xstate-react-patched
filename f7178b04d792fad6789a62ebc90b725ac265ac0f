@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "f7178b04d792fad6789a62ebc90b725ac265ac0f",
+  "prompts": {
+    "85c1fa2707f37f1d": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8d272f15-8892-4099-8f21-618f35e91507",
+        "model": "premium"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 124,
+      "total_deletions": 90,
+      "accepted_lines": 103,
+      "overriden_lines": 0
+    }
+  }
+}
