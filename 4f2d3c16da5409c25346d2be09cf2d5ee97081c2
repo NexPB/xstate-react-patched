@@ -1,0 +1,27 @@
+test/createActorContext.test.tsx
+  e17c38424e694fac 43,70,106,223
+test/useMachine.test.tsx
+  e17c38424e694fac 518,562
+test/useInterpret.test.tsx
+  e17c38424e694fac 235,292
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "4f2d3c16da5409c25346d2be09cf2d5ee97081c2",
+  "prompts": {
+    "e17c38424e694fac": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "0d783dd4-16f5-4d8d-ac70-eee9a0edf59f",
+        "model": "premium"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 8,
+      "total_deletions": 8,
+      "accepted_lines": 8,
+      "overriden_lines": 0
+    }
+  }
+}
