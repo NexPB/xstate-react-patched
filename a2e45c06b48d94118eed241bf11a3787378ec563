@@ -1,0 +1,27 @@
+test/useInterpret.test.tsx
+  85c1fa2707f37f1d 15-17,35-37,45-48,51-53,72,91-94
+test/useMachine-fsm.test.tsx
+  85c1fa2707f37f1d 4,84-86,103,137-140,143,178-181,184,186,219-223,363-365,390,397-400
+test/useMachine.test.tsx
+  85c1fa2707f37f1d 1,186,223-225,242,276-279,603-605,630,637-640
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "a2e45c06b48d94118eed241bf11a3787378ec563",
+  "prompts": {
+    "85c1fa2707f37f1d": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8d272f15-8892-4099-8f21-618f35e91507",
+        "model": "premium"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 97,
+      "overriden_lines": 0
+    }
+  }
+}
