@@ -1,4 +1,4 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import * as React from 'react';
 import { useState } from 'react';
 import {
@@ -21,8 +21,8 @@ afterEach(() => {
   console.error = originalConsoleError;
 });
 
-describeEachReactMode('useActor (%s)', ({ render }) => {
-  it('initial invoked actor should be immediately available', (done) => {
+describeEachReactMode('useActor (%s)', ({ suiteKey, render }) => {
+  it('initial invoked actor should be immediately available', () => {
     const childMachine = createMachine({
       id: 'childMachine',
       initial: 'active',
@@ -48,8 +48,6 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
 
       expect(state.value).toEqual('active');
 
-      done();
-
       return null;
     };
 
@@ -66,7 +64,9 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
     render(<Test />);
   });
 
-  it('invoked actor should be able to receive (deferred) events that it replays when active', (done) => {
+  it('invoked actor should be able to receive (deferred) events that it replays when active', async () => {
+    let reachedSuccess = false;
+
     const childMachine = createMachine({
       id: 'childMachine',
       initial: 'active',
@@ -110,7 +110,7 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
       const [state] = useMachine(machine);
 
       if (state.matches('success')) {
-        done();
+        reachedSuccess = true;
       }
 
       return (
@@ -121,9 +121,14 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
     };
 
     render(<Test />);
+
+    await waitFor(() => {
+      expect(reachedSuccess).toBeTruthy();
+    });
   });
 
-  it('initial spawned actor should be immediately available', (done) => {
+  it('initial spawned actor should be immediately available', () => {
+
     const childMachine = createMachine({
       id: 'childMachine',
       initial: 'active',
@@ -155,8 +160,6 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
 
       expect(state.value).toEqual('active');
 
-      done();
-
       return null;
     };
 
@@ -170,7 +173,9 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
     render(<Test />);
   });
 
-  it('spawned actor should be able to receive (deferred) events that it replays when active', (done) => {
+  it('spawned actor should be able to receive (deferred) events that it replays when active', async () => {
+    let reachedSuccess = false;
+
     const childMachine = createMachine({
       id: 'childMachine',
       initial: 'active',
@@ -218,7 +223,7 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
       const [state] = useMachine(machine);
 
       if (state.matches('success')) {
-        done();
+        reachedSuccess = true;
       }
 
       const { actorRef } = state.context;
@@ -227,6 +232,10 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
     };
 
     render(<Test />);
+
+    await waitFor(() => {
+      expect(reachedSuccess).toBeTruthy();
+    });
   });
 
   it('actor should provide snapshot value immediately', () => {
@@ -329,7 +338,7 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
     expect(div.textContent).toEqual('100');
   });
 
-  it('send() should be stable', (done) => {
+  it('send() should be stable', () => {
     jest.useFakeTimers();
     const fakeSubscribe = () => {
       return {
@@ -345,9 +354,10 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
       send: noop,
       subscribe: fakeSubscribe
     });
+    let sendCount = 0;
     const lastActor = toActorRef({
       send: () => {
-        done();
+        sendCount += 1;
       },
       subscribe: fakeSubscribe
     });
@@ -383,6 +393,8 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
     // At this point, `send` refers to the last actor
 
     jest.advanceTimersByTime(20);
+
+    expect(sendCount).toBe(suiteKey === 'strict' ? 2 : 1);
 
     // The effect will call the closed-in `send`, which originally
     // was the reference to the first actor. Now that `send` is stable,
@@ -523,6 +535,6 @@ describeEachReactMode('useActor (%s)', ({ render }) => {
 
     render(<App />);
 
-    expect(spy).not.toBeCalled();
+    expect(spy).not.toHaveBeenCalled();
   });
 });

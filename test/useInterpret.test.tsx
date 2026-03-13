@@ -12,7 +12,9 @@ afterEach(() => {
 });
 
 describeEachReactMode('useInterpret (%s)', ({ suiteKey, render }) => {
-  it('observer should be called with initial state', (done) => {
+  it('observer should be called with initial state', async () => {
+    let sawInitialState = false;
+
     const machine = createMachine({
       initial: 'inactive',
       states: {
@@ -30,8 +32,9 @@ describeEachReactMode('useInterpret (%s)', ({ suiteKey, render }) => {
 
       React.useEffect(() => {
         service.subscribe((state) => {
-          expect(state.matches('inactive')).toBeTruthy();
-          done();
+          if (state.matches('inactive')) {
+            sawInitialState = true;
+          }
         });
       }, [service]);
 
@@ -39,9 +42,15 @@ describeEachReactMode('useInterpret (%s)', ({ suiteKey, render }) => {
     };
 
     render(<App />);
+
+    await waitFor(() => {
+      expect(sawInitialState).toBeTruthy();
+    });
   });
 
-  it('observer should be called with next state', (done) => {
+  it('observer should be called with next state', async () => {
+    let sawNextState = false;
+
     const machine = createMachine({
       initial: 'inactive',
       states: {
@@ -60,7 +69,7 @@ describeEachReactMode('useInterpret (%s)', ({ suiteKey, render }) => {
       React.useEffect(() => {
         service.subscribe((state) => {
           if (state.matches('active')) {
-            done();
+            sawNextState = true;
           }
         });
       }, [service]);
@@ -79,6 +88,10 @@ describeEachReactMode('useInterpret (%s)', ({ suiteKey, render }) => {
     const button = screen.getByTestId('button');
 
     fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(sawNextState).toBeTruthy();
+    });
   });
 
   it('actions created by a layout effect should access the latest closure values', () => {

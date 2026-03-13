@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMachine } from '../src/fsm';
 import { createMachine, assign, interpret, StateMachine } from '@xstate/fsm';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { describeEachReactMode } from './utils';
 
 describeEachReactMode('useMachine, fsm (%s)', ({ suiteKey, render }) => {
@@ -81,7 +81,9 @@ describeEachReactMode('useMachine, fsm (%s)', ({ suiteKey, render }) => {
     render(<Test />);
   });
 
-  it('actions should not have stale data', async (done) => {
+  it('actions should not have stale data', async () => {
+    let actionReceivedLatestExt = false;
+
     const toggleMachine = createMachine({
       initial: 'inactive',
       states: {
@@ -98,8 +100,7 @@ describeEachReactMode('useMachine, fsm (%s)', ({ suiteKey, render }) => {
       const [ext, setExt] = React.useState(false);
 
       const doAction = React.useCallback(() => {
-        expect(ext).toBeTruthy();
-        done();
+        actionReceivedLatestExt = ext;
       }, [ext]);
 
       const [, send] = useMachine(toggleMachine, {
@@ -133,9 +134,13 @@ describeEachReactMode('useMachine, fsm (%s)', ({ suiteKey, render }) => {
     fireEvent.click(extButton);
 
     fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(actionReceivedLatestExt).toBeTruthy();
+    });
   });
 
-  it('should keep options defined on a machine when they are not possed to `useMachine` hook', async (done) => {
+  it('should keep options defined on a machine when they are not possed to `useMachine` hook', async () => {
     let actual = false;
 
     const toggleMachine = createMachine(
@@ -164,18 +169,21 @@ describeEachReactMode('useMachine, fsm (%s)', ({ suiteKey, render }) => {
 
       React.useEffect(() => {
         send('TOGGLE');
-        expect(actual).toEqual(true);
-        done();
       }, []);
 
       return null;
     };
 
     render(<Comp />);
+
+    await waitFor(() => {
+      expect(actual).toEqual(true);
+    });
   });
 
-  it('should be able to lookup initial action passed to the hook', async (done) => {
+  it('should be able to lookup initial action passed to the hook', async () => {
     let outer = false;
+    let inner = false;
 
     const machine = createMachine(
       {
@@ -196,8 +204,6 @@ describeEachReactMode('useMachine, fsm (%s)', ({ suiteKey, render }) => {
     );
 
     const Comp = () => {
-      let inner = false;
-
       useMachine(machine, {
         actions: {
           doAction() {
@@ -206,16 +212,15 @@ describeEachReactMode('useMachine, fsm (%s)', ({ suiteKey, render }) => {
         }
       });
 
-      React.useEffect(() => {
-        expect(outer).toBe(false);
-        expect(inner).toBe(true);
-        done();
-      }, []);
-
       return null;
     };
 
     render(<Comp />);
+
+    await waitFor(() => {
+      expect(outer).toBe(false);
+      expect(inner).toBe(true);
+    });
   });
 
   it('should not change actions configured on a machine itself', () => {
@@ -355,7 +360,9 @@ describeEachReactMode('useMachine, fsm (%s)', ({ suiteKey, render }) => {
     expect(actual).toEqual([42]);
   });
 
-  it('child component should be able to send an event to a parent immediately in an effect', (done) => {
+  it('child component should be able to send an event to a parent immediately in an effect', async () => {
+    let reachedSuccess = false;
+
     const machine = createMachine<any, { type: 'FINISH' }>({
       initial: 'active',
       states: {
@@ -380,13 +387,17 @@ describeEachReactMode('useMachine, fsm (%s)', ({ suiteKey, render }) => {
       const [state, send] = useMachine(machine);
 
       if (state.matches('success')) {
-        done();
+        reachedSuccess = true;
       }
 
       return <ChildTest send={send} />;
     };
 
     render(<Test />);
+
+    await waitFor(() => {
+      expect(reachedSuccess).toBeTruthy();
+    });
   });
 
   it('should not execute actions (side-effects) in render', () => {

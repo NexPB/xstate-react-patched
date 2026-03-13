@@ -1,4 +1,4 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import * as React from 'react';
 import { useState } from 'react';
 import {
@@ -183,7 +183,7 @@ describeEachReactMode('useMachine (%s)', ({ suiteKey, render }) => {
     render(<Test />);
   });
 
-  it('should not spawn actors until service is started', async (done) => {
+  it('should not spawn actors until service is started', async () => {
     const spawnMachine = Machine<any>({
       id: 'spawn',
       initial: 'start',
@@ -218,10 +218,11 @@ describeEachReactMode('useMachine (%s)', ({ suiteKey, render }) => {
 
     render(<Spawner />);
     await screen.findByTestId('success');
-    done();
   });
 
-  it('actions should not have stale data', async (done) => {
+  it('actions should not have stale data', async () => {
+    let actionReceivedLatestExt = false;
+
     const toggleMachine = Machine<any, { type: 'TOGGLE' }>({
       initial: 'inactive',
       states: {
@@ -238,8 +239,7 @@ describeEachReactMode('useMachine (%s)', ({ suiteKey, render }) => {
       const [ext, setExt] = useState(false);
 
       const doAction = React.useCallback(() => {
-        expect(ext).toBeTruthy();
-        done();
+        actionReceivedLatestExt = ext;
       }, [ext]);
 
       const [, send] = useMachine(toggleMachine, {
@@ -273,6 +273,10 @@ describeEachReactMode('useMachine (%s)', ({ suiteKey, render }) => {
     fireEvent.click(extButton);
 
     fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(actionReceivedLatestExt).toBeTruthy();
+    });
   });
 
   it('should compile with typed matches (createMachine)', () => {
@@ -596,7 +600,9 @@ describeEachReactMode('useMachine (%s)', ({ suiteKey, render }) => {
     expect(activatedCount).toEqual(suiteKey === 'strict' ? 2 : 1);
   });
 
-  it('child component should be able to send an event to a parent immediately in an effect', (done) => {
+  it('child component should be able to send an event to a parent immediately in an effect', async () => {
+    let reachedSuccess = false;
+
     const machine = createMachine<any, { type: 'FINISH' }>({
       initial: 'active',
       states: {
@@ -621,13 +627,17 @@ describeEachReactMode('useMachine (%s)', ({ suiteKey, render }) => {
       const [state, send] = useMachine(machine);
 
       if (state.matches('success')) {
-        done();
+        reachedSuccess = true;
       }
 
       return <ChildTest send={send} />;
     };
 
     render(<Test />);
+
+    await waitFor(() => {
+      expect(reachedSuccess).toBeTruthy();
+    });
   });
 
   it('custom data should be available right away for the invoked actor', () => {
