@@ -21,6 +21,18 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./fsm": {
+      "import": "./es/fsm.js",
+      "require": "./lib/fsm.js",
+      "types": "./lib/fsm.d.ts"
+    }
+  },
   "typesVersions": {
     "<4.0": {
       "lib/index.d.ts": [
