@@ -1,6 +1,6 @@
 {
   "name": "@nexpb/xstate-react-patched",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "XState tools for React (patched)",
   "keywords": [
     "state",
