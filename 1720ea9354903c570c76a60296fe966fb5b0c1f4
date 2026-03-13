@@ -1,0 +1,49 @@
+package.json
+  1327cedb3142e887 73-75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "1720ea9354903c570c76a60296fe966fb5b0c1f4",
+  "prompts": {
+    "1327cedb3142e887": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "c6b48014-82f3-4903-9b67-c417a4ac4955",
+        "model": "default"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 1,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "2834328ea92999fa": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "84c7f165-1682-414a-aa67-d9d3bcbe3032",
+        "model": "claude-4.6-sonnet-medium-thinking"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 30,
+      "total_deletions": 0,
+      "accepted_lines": 11,
+      "overriden_lines": 9
+    },
+    "4455b83329d4d0d3": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "66e51475-a114-43b2-94ef-a20d289038e2",
+        "model": "default"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 0,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
