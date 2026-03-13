@@ -1,0 +1,31 @@
+package.json
+  cb06a116c1267e52 2-3,80,89,92
+jest.config.js
+  cb06a116c1267e52 3
+rollup.config.js
+  cb06a116c1267e52 12-14
+tsconfig.json
+  cb06a116c1267e52 3-15,17,19
+src/useActor.ts
+  cb06a116c1267e52 39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "e976a1f562144ea0f18eb1f7533935821dae1714",
+  "prompts": {
+    "cb06a116c1267e52": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "bbd4e2ce-f773-4092-ab6a-ef357a3e304b",
+        "model": "claude-4.6-opus-high-thinking"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 25,
+      "total_deletions": 23,
+      "accepted_lines": 25,
+      "overriden_lines": 0
+    }
+  }
+}
