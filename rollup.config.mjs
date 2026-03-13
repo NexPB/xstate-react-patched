@@ -1,21 +1,11 @@
+import { readFileSync } from 'node:fs';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
-import typescript from 'rollup-plugin-typescript2';
-import replace from 'rollup-plugin-replace';
-import pkg from './package.json';
+import replace from '@rollup/plugin-replace';
+import terser from '@rollup/plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 
-function createTSCofig() {
-  return typescript({
-    tsconfigOverride: {
-      compilerOptions: {
-        declaration: false,
-        declarationMap: false,
-        module: 'ES2015'
-      }
-    }
-  });
-}
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 
 const makeExternalPredicate = (externalArr) => {
   if (externalArr.length === 0) {
@@ -40,14 +30,22 @@ function createUmdConfig({ input, output: file, name }) {
       }
     },
     plugins: [
-      commonjs(),
       nodeResolve({
         browser: true
       }),
+      commonjs(),
       replace({
-        'process.env.NODE_ENV': JSON.stringify('production')
+        preventAssignment: true,
+        values: { 'process.env.NODE_ENV': JSON.stringify('production') }
       }),
-      createTSCofig(),
+      typescript({
+        compilerOptions: {
+          declaration: false,
+          declarationMap: false,
+          module: 'ES2015',
+          outDir: './dist'
+        }
+      }),
       terser()
     ]
   };
