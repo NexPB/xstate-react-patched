@@ -1,33 +1,18 @@
-# @xstate/react
+# xstate-react-patched
 
-This package contains utilities for using [XState](https://github.com/statelyai/xstate) with [React](https://github.com/facebook/react/).
+This package contains utilities for using [XState](https://github.com/statelyai/xstate/releases/tag/%40xstate%2Freact%403.2.2) with [React](https://github.com/facebook/react/).
+
+> Note: This repository is a patched fork of the upstream `@xstate/react` package from hash [5dd9e25](https://github.com/statelyai/xstate/commit/5dd9e258c93dfd5a9e2898ea97c9d8137552d1c2), maintained specifically to preserve support for the removed `@xstate/fsm` dependency.
 
 - [Read the full documentation in the XState docs](https://xstate.js.org/docs/packages/xstate-react/).
-- [Read our contribution guidelines](https://github.com/statelyai/xstate/blob/main/CONTRIBUTING.md).
 
 ## Quick start
 
 1. Install `xstate` and `@xstate/react`:
 
 ```bash
-npm i xstate @xstate/react
+npm i xstate@4.37.2 xstate-react-patched@3.2.2-patch.0
 ```
-
-**Via CDN**
-
-```html
-<script src="https://unpkg.com/@xstate/react/dist/xstate-react.umd.min.js"></script>
-```
-
-By using the global variable `XStateReact`
-
-or
-
-```html
-<script src="https://unpkg.com/@xstate/react/dist/xstate-react-fsm.umd.min.js"></script>
-```
-
-By using the global variable `XStateReactFSM`
 
 2. Import the `useMachine` hook:
 

@@ -13,6 +13,9 @@
     "hook"
   ],
   "author": "David Khourshid <davidkpiano@gmail.com>",
+  "contributors": [
+    "Lorenzo De Loof <lorenzo@nexp.be>"
+  ],
   "homepage": "https://github.com/statelyai/xstate/tree/main/packages/xstate-react#readme",
   "license": "MIT",
   "main": "lib/index.js",
