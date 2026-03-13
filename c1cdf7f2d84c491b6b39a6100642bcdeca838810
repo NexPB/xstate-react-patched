@@ -1,0 +1,23 @@
+test/createActorContext.test.tsx
+  85c1fa2707f37f1d 12-22,25-28,278,293,308
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "c1cdf7f2d84c491b6b39a6100642bcdeca838810",
+  "prompts": {
+    "85c1fa2707f37f1d": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8d272f15-8892-4099-8f21-618f35e91507",
+        "model": "premium"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 32,
+      "overriden_lines": 0
+    }
+  }
+}
