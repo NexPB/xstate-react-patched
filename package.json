@@ -16,7 +16,7 @@
   "contributors": [
     "Lorenzo De Loof <lorenzo@nexp.be>"
   ],
-  "homepage": "https://github.com/nexpb/xstate-react-patched#readme",
+  "homepage": "https://github.com/NexPB/xstate-react-patched#readme",
   "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -42,8 +42,8 @@
     "fsm/package.json"
   ],
   "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/nexpb/xstate-react-patched.git"
+  "type": "git",
+  "url": "https://github.com/NexPB/xstate-react-patched"
   },
   "scripts": {
     "clean": "rm -rf dist lib tsconfig.tsbuildinfo",
@@ -51,7 +51,7 @@
     "test": "jest"
   },
   "bugs": {
-    "url": "https://github.com/nexpb/xstate-react-patched/issues"
+  "url": "https://github.com/NexPB/xstate-react-patched/issues"
   },
   "peerDependencies": {
     "@xstate/fsm": "^2.0.0",
