@@ -1,0 +1,24 @@
+.github/workflows/publish.yml
+  85c1fa2707f37f1d 1,4-6,8-11,13,20,22-25
+  2834328ea92999fa 2-3,7,12,14-19,21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "c26de0004423a6ea1e4e5abf78ee56e2b3a01784",
+  "prompts": {
+    "85c1fa2707f37f1d": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8d272f15-8892-4099-8f21-618f35e91507",
+        "model": "premium"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 14,
+      "overriden_lines": 0
+    }
+  }
+}
