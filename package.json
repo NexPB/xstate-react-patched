@@ -1,6 +1,6 @@
 {
   "name": "xstate-react-patched",
-  "version": "3.2.2-patch.0",
+  "version": "3.2.2-patch.2",
   "description": "XState tools for React",
   "keywords": [
     "state",
