@@ -1,17 +1,20 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "include": ["src/**/*"],
   "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es6", "dom"],
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationMap": true,
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "jsx": "react",
     "outDir": "./lib",
-    "rootDir": "./src",
-    "jsx": "react"
+    "rootDir": "./src"
   },
-  "references": [
-    {
-      "path": "../core"
-    },
-    {
-      "path": "../xstate-fsm"
-    }
-  ]
+  "include": ["src/**/*"]
 }

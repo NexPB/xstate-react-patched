@@ -36,7 +36,7 @@ function defaultGetSnapshot<TEmitted>(
       ? getServiceSnapshot(actorRef as any)
       : actorRef.getSnapshot()
     : isActorWithState(actorRef)
-    ? actorRef.state
+    ? (actorRef as ActorRef<any, TEmitted> & { state: TEmitted }).state
     : undefined;
 }
 

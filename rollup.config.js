@@ -9,7 +9,9 @@ function createTSCofig() {
   return typescript({
     tsconfigOverride: {
       compilerOptions: {
-        declaration: false
+        declaration: false,
+        declarationMap: false,
+        module: 'ES2015'
       }
     }
   });
