@@ -232,7 +232,7 @@ describeEachReactMode('useInterpret (%s)', ({ suiteKey, render }) => {
           >
             Send to child
           </button>
-          <div data-testid="child-state">{childState.value}</div>
+          <div data-testid="child-state">{String(childState.value)}</div>
         </>
       );
     };
@@ -289,7 +289,7 @@ describeEachReactMode('useInterpret (%s)', ({ suiteKey, render }) => {
           >
             Send to child
           </button>
-          <div data-testid="child-state">{childState.value}</div>
+          <div data-testid="child-state">{String(childState.value)}</div>
         </>
       );
     };

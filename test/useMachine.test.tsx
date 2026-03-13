@@ -515,7 +515,7 @@ describeEachReactMode('useMachine (%s)', ({ suiteKey, render }) => {
       const [state, send] = useMachine(machine);
       return (
         <>
-          <div data-testid="result">{state.value}</div>
+          <div data-testid="result">{String(state.value)}</div>
           <button onClick={() => send({ type: 'EV' })} />
         </>
       );
@@ -559,7 +559,7 @@ describeEachReactMode('useMachine (%s)', ({ suiteKey, render }) => {
       });
       return (
         <>
-          <div data-testid="result">{state.value}</div>
+          <div data-testid="result">{String(state.value)}</div>
           <button onClick={() => send({ type: 'EV' })} />
         </>
       );

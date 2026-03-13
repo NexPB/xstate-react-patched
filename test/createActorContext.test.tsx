@@ -40,7 +40,7 @@ describe('createActorContext', () => {
     const Component = () => {
       const [state] = SomeContext.useActor();
 
-      return <div data-testid="value">{state.value}</div>;
+      return <div data-testid="value">{String(state.value)}</div>;
     };
 
     const App = () => {
@@ -67,7 +67,7 @@ describe('createActorContext', () => {
     const Component = () => {
       const value = SomeContext.useSelector((state) => state.value);
 
-      return <div data-testid="value">{value}</div>;
+      return <div data-testid="value">{String(value)}</div>;
     };
 
     const App = () => {
@@ -103,7 +103,7 @@ describe('createActorContext', () => {
 
       return (
         <>
-          <div data-testid="value">{state.value}</div>
+          <div data-testid="value">{String(state.value)}</div>
           <button data-testid="next" onClick={() => send({ type: 'NEXT' })}>
             Next
           </button>
@@ -220,7 +220,7 @@ describe('createActorContext', () => {
       const actor = SomeContext.useActorRef();
       const value = useSelector(actor, (state) => state.value);
 
-      return <div data-testid="value">{value}</div>;
+      return <div data-testid="value">{String(value)}</div>;
     };
 
     const App = () => {
