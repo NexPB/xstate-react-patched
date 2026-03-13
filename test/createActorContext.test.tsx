@@ -9,17 +9,23 @@ afterEach(() => {
   console.error = originalConsoleError;
 });
 
+function getConsoleErrorLine(callIndex: number, argIndex = 0): string {
+  const arg = (console.error as jest.Mock).mock.calls[callIndex][argIndex];
+  const str =
+    typeof arg === 'string'
+      ? arg
+      : arg && typeof arg === 'object' && 'message' in arg
+        ? String((arg as Error).message)
+        : String(arg);
+  return str.split('\n')[0];
+}
+
 function checkConsoleErrorOutputForMissingProvider() {
   expect(console.error).toHaveBeenCalledTimes(3);
-  expect((console.error as any).mock.calls[0][0].split('\n')[0]).toBe(
-    `Error: Uncaught [Error: You used a hook from \"ActorProvider((machine))\" but it's not inside a <ActorProvider((machine))> component.]`
-  );
-  expect((console.error as any).mock.calls[1][0].split('\n')[0]).toBe(
-    `Error: Uncaught [Error: You used a hook from \"ActorProvider((machine))\" but it's not inside a <ActorProvider((machine))> component.]`
-  );
-  expect((console.error as any).mock.calls[2][0].split('\n')[0]).toBe(
-    `The above error occurred in the <App> component:`
-  );
+  const expectedProviderMsg = `Uncaught [Error: You used a hook from "ActorProvider((machine))" but it's not inside a <ActorProvider((machine))> component.]`;
+  expect(getConsoleErrorLine(0)).toBe(expectedProviderMsg);
+  expect(getConsoleErrorLine(1)).toBe(expectedProviderMsg);
+  expect(getConsoleErrorLine(2)).toBe(`The above error occurred in the <App> component:`);
 }
 
 describe('createActorContext', () => {
@@ -269,7 +275,7 @@ describe('createActorContext', () => {
     };
 
     expect(() => render(<App />)).toThrowErrorMatchingInlineSnapshot(
-      `"You used a hook from \\"ActorProvider((machine))\\" but it's not inside a <ActorProvider((machine))> component."`
+      `"You used a hook from "ActorProvider((machine))" but it's not inside a <ActorProvider((machine))> component."`
     );
     checkConsoleErrorOutputForMissingProvider();
   });
@@ -284,7 +290,7 @@ describe('createActorContext', () => {
     };
 
     expect(() => render(<App />)).toThrowErrorMatchingInlineSnapshot(
-      `"You used a hook from \\"ActorProvider((machine))\\" but it's not inside a <ActorProvider((machine))> component."`
+      `"You used a hook from "ActorProvider((machine))" but it's not inside a <ActorProvider((machine))> component."`
     );
     checkConsoleErrorOutputForMissingProvider();
   });
@@ -299,7 +305,7 @@ describe('createActorContext', () => {
     };
 
     expect(() => render(<App />)).toThrowErrorMatchingInlineSnapshot(
-      `"You used a hook from \\"ActorProvider((machine))\\" but it's not inside a <ActorProvider((machine))> component."`
+      `"You used a hook from "ActorProvider((machine))" but it's not inside a <ActorProvider((machine))> component."`
     );
     checkConsoleErrorOutputForMissingProvider();
   });
