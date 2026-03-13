@@ -1,0 +1,36 @@
+package.json
+  2788d4e279d95b2b 47,72-74,76,89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "12e74253baf2cc2ab3592a519bceeb4c8d7c73a2",
+  "prompts": {
+    "2788d4e279d95b2b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "91359f2e-f04c-48f9-a7a2-23b2e8dfda95",
+        "model": "claude-4.6-opus-high-thinking"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 25,
+      "total_deletions": 26,
+      "accepted_lines": 20,
+      "overriden_lines": 1
+    },
+    "49a1a9a8539bf582": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "7ff7e4be-5e73-47e5-85a8-54eb8a640549",
+        "model": "claude-4.6-opus-high-thinking"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  }
+}
