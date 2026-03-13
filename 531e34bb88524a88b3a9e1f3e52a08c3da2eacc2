@@ -1,0 +1,23 @@
+package.json
+  bcd9179013cddbee 16-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "531e34bb88524a88b3a9e1f3e52a08c3da2eacc2",
+  "prompts": {
+    "bcd9179013cddbee": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "6d305556-3a74-40c8-8cc7-69a8e83b268c",
+        "model": "premium"
+      },
+      "human_author": "NexPB <1289189+NexPB@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 8,
+      "total_deletions": 3,
+      "accepted_lines": 4,
+      "overriden_lines": 1
+    }
+  }
+}
